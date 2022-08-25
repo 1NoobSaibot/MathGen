@@ -1,7 +1,6 @@
-﻿using MathGen;
-using MathGen.Float;
+﻿using MathGen.Double;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+
 
 namespace MathGenTest
 {

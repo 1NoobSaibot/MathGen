@@ -1,4 +1,4 @@
-﻿namespace MathGen.Float
+﻿namespace MathGen.Double
 {
 	internal class Argument : IFunctionNode
 	{

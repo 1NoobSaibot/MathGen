@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace MathGen.Float
+namespace MathGen.Double
 {
 	public class ArgsDescription
 	{

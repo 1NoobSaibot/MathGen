@@ -1,4 +1,4 @@
-﻿using MathGen.Float;
+﻿using MathGen.Double;
 using System;
 using System.Collections.Generic;
 
@@ -99,7 +99,7 @@ namespace MathGen
 		{
 			try
 			{
-				return new Constant(Double.Parse(symbol));
+				return new Constant(double.Parse(symbol));
 			}
 			catch (Exception)
 			{ }
