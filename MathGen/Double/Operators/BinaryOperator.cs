@@ -1,4 +1,4 @@
-﻿namespace MathGen.Double
+﻿namespace MathGen.Double.Operators
 {
 	internal abstract class BinaryOperator : IOperator
 	{

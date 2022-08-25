@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace MathGen.Double
+
+namespace MathGen.Double.Operators
 {
 	internal class Constant : IFunctionNode
 	{

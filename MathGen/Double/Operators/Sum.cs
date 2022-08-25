@@ -1,9 +1,10 @@
-﻿namespace MathGen.Double
+﻿namespace MathGen.Double.Operators
 {
 	internal class Sum : BinaryOperator
 	{
 		public Sum(IFunctionNode a, IFunctionNode b):base(a, b)
 		{ }
+
 
 		public override OperationPriority GetPriority() => OperationPriority.Plus;
 

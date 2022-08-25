@@ -1,4 +1,4 @@
-﻿namespace MathGen.Double
+﻿namespace MathGen.Double.Operators
 {
 	public abstract class IFunctionNode
 	{

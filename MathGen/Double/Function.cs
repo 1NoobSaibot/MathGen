@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathGen.Double.Operators;
+using System;
 
 
 namespace MathGen.Double

@@ -42,20 +42,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Double\ArgsDescription.cs" />
-    <Compile Include="Double\Argument.cs" />
-    <Compile Include="Double\BinaryOperator.cs" />
+    <Compile Include="Double\Operators\Argument.cs" />
+    <Compile Include="Double\Operators\BinaryOperator.cs" />
     <Compile Include="Double\Compression\Delegates.cs" />
     <Compile Include="Double\Compression\Optimizer.cs" />
     <Compile Include="Double\Compression\Rule.cs" />
-    <Compile Include="Double\Constant.cs" />
+    <Compile Include="Double\Operators\Constant.cs" />
     <Compile Include="Double\Function.cs" />
-    <Compile Include="Double\IFunctionNode.cs" />
-    <Compile Include="Double\IOperator.cs" />
+    <Compile Include="Double\Operators\IFunctionNode.cs" />
+    <Compile Include="Double\Operators\IOperator.cs" />
     <Compile Include="Double\Parser.cs" />
-    <Compile Include="Double\Mul.cs" />
-    <Compile Include="Double\Sub.cs" />
+    <Compile Include="Double\Operators\Mul.cs" />
+    <Compile Include="Double\Operators\Sub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Double\Sum.cs" />
+    <Compile Include="Double\Operators\Sum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

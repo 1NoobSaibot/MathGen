@@ -1,4 +1,6 @@
-﻿
+﻿using MathGen.Double.Operators;
+
+
 namespace MathGen.Double.Compression
 {
 	public class Rule

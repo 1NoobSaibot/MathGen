@@ -1,6 +1,8 @@
 ﻿using MathGen.Double;
+using MathGen.Double.Operators;
 using System;
 using System.Collections.Generic;
+
 
 namespace MathGen
 {

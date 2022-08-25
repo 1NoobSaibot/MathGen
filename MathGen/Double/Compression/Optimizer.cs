@@ -1,4 +1,7 @@
-﻿namespace MathGen.Double.Compression
+﻿using MathGen.Double.Operators;
+
+
+namespace MathGen.Double.Compression
 {
 	public static class Optimizer
 	{
