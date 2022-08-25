@@ -1,8 +1,8 @@
 ﻿namespace MathGen.Double
 {
-	internal interface IOperator : IFunctionNode
+	internal abstract class IOperator : IFunctionNode
 	{
-		OperationPriority GetPriority();
+		public abstract OperationPriority GetPriority();
 	}
 
 

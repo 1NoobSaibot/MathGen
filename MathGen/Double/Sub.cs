@@ -18,5 +18,15 @@
 		{
 			return A.Equals(B) || (A.IsZero() && B.IsZero());
 		}
+
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Sub sub)
+			{
+				return A.Equals(sub.A) && B.Equals(sub.B);
+			}
+			return false;
+		}
 	}
 }

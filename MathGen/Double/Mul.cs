@@ -18,5 +18,16 @@
 		{
 			return A.IsZero() || B.IsZero();
 		}
+
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Mul mul)
+			{
+				return (mul.A.Equals(A) && mul.B.Equals(B))
+						|| (mul.A.Equals(B) && mul.B.Equals(A));
+			}
+			return false;
+		}
 	}
 }

@@ -13,13 +13,13 @@ namespace MathGen.Double
 		}
 
 
-		public double GetValue(double[] functionArgs)
+		public override double GetValue(double[] functionArgs)
 		{
 			return this.Value;
 		}
 
 
-		public bool IsZero()
+		public override bool IsZero()
 		{
 			return Math.Abs(Value) <= 1E-15;
 		}
@@ -28,6 +28,16 @@ namespace MathGen.Double
 		public override string ToString()
 		{
 			return Value.ToString();
+		}
+
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Constant constant)
+			{
+				return constant.Value == this.Value;
+			}
+			return false;
 		}
 	}
 }

@@ -44,6 +44,9 @@
     <Compile Include="Double\ArgsDescription.cs" />
     <Compile Include="Double\Argument.cs" />
     <Compile Include="Double\BinaryOperator.cs" />
+    <Compile Include="Double\Compression\Delegates.cs" />
+    <Compile Include="Double\Compression\Optimizer.cs" />
+    <Compile Include="Double\Compression\Rule.cs" />
     <Compile Include="Double\Constant.cs" />
     <Compile Include="Double\Function.cs" />
     <Compile Include="Double\IFunctionNode.cs" />

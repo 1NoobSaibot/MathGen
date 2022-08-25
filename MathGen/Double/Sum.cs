@@ -18,5 +18,16 @@
 		{
 			return A.IsZero() && B.IsZero();
 		}
+
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Sum sum)
+			{
+				return (A.Equals(sum.A) && B.Equals(sum.B))
+						|| (A.Equals(sum.B) && B.Equals(sum.A));
+			}
+			return false;
+		}
 	}
 }

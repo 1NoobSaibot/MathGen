@@ -13,13 +13,13 @@
 		}
 
 
-		public double GetValue(double[] functionArgs)
+		public override double GetValue(double[] functionArgs)
 		{
 			return functionArgs[index];
 		}
 
 
-		public bool IsZero()
+		public override bool IsZero()
 		{
 			return false;
 		}
@@ -28,6 +28,15 @@
 		public override string ToString()
 		{
 			return name;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is Argument arg)
+			{
+				return arg.index == index;
+			}
+			return false;
 		}
 	}
 }
