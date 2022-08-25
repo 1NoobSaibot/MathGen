@@ -1,7 +1,8 @@
 ﻿namespace MathGen.Double
 {
-	internal interface IFunctionNode
+	public interface IFunctionNode
 	{
 		double GetValue(double[] functionArgs);
+		bool IsZero();
 	}
 }

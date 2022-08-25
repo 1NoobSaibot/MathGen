@@ -1,4 +1,6 @@
-﻿namespace MathGen.Double
+﻿using System;
+
+namespace MathGen.Double
 {
 	internal class Constant : IFunctionNode
 	{
@@ -14,6 +16,12 @@
 		public double GetValue(double[] functionArgs)
 		{
 			return this.Value;
+		}
+
+
+		public bool IsZero()
+		{
+			return Math.Abs(Value) <= 1E-15;
 		}
 
 

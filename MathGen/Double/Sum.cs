@@ -12,5 +12,11 @@
 		{
 			return A.GetValue(functionArgs) + B.GetValue(functionArgs);
 		}
+
+
+		public override bool IsZero()
+		{
+			return A.IsZero() && B.IsZero();
+		}
 	}
 }

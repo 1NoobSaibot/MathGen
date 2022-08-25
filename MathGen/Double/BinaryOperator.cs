@@ -12,8 +12,13 @@
 			B = b;
 		}
 
+
 		public abstract OperationPriority GetPriority();
 
+
 		public abstract double GetValue(double[] functionArgs);
+
+
+		public abstract bool IsZero();
 	}
 }

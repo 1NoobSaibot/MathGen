@@ -19,6 +19,12 @@
 		}
 
 
+		public bool IsZero()
+		{
+			return false;
+		}
+
+
 		public override string ToString()
 		{
 			return name;
