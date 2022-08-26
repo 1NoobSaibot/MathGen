@@ -1,33 +1,36 @@
 ﻿using MathGen.Double.Operators;
 using MathGen.Double.Text;
 using System;
-
+using System.Collections.Generic;
 
 namespace MathGen.Double
 {
 	public class Function
 	{
 		private IFunctionNode _root;
-		private ArgsDescription _args;
+		private FunctionRandomContext _context;
+		public readonly int AmountOfNodes;
 
 
-		public Function(ArgsDescription args, string expression)
+		public Function(FunctionRandomContext context, string expression)
 		{
-			_args = args;
-			_root = Parser.Parse(args, expression);
+			_context = context;
+			_root = Parser.Parse(context.Args, expression);
+			AmountOfNodes = _root.GetAmountOfNodes();
 		}
 
 
-		private Function(ArgsDescription args, IFunctionNode root)
+		private Function(FunctionRandomContext context, IFunctionNode root)
 		{
-			_args = args;
+			_context = context;
 			_root = root;
+			AmountOfNodes = _root.GetAmountOfNodes();
 		}
 
 
 		public double Calculate(params double[] argValues)
 		{
-			if (_args.Count != argValues.Length)
+			if (_context.Args.Count != argValues.Length)
 			{
 				throw new Exception("Amount of arguments doesn't equal to count of its names");
 			}
@@ -44,7 +47,7 @@ namespace MathGen.Double
 
 		public Function Clone()
 		{
-			return new Function(_args, _root.Clone());
+			return new Function(_context, _root.Clone());
 		}
 
 
@@ -53,7 +56,54 @@ namespace MathGen.Double
 
 		public int GetAmountOfNodes()
 		{
-			return _root.GetAmountOfNodes();
+			return AmountOfNodes;
+		}
+
+
+		public Function GetMutatedClone(Random rnd)
+		{
+			Function clone = Clone();
+			clone.Mutate(rnd);
+			return clone;
+		}
+
+
+		private void Mutate(Random rnd)
+		{
+			List<IFunctionNode> operators = new List<IFunctionNode>();
+			_root.AddOperatorsToList(operators);
+
+			int randomOpIndex = rnd.Next(operators.Count);
+			IFunctionNode choosenNode = operators[randomOpIndex];
+			IFunctionNode mutatedNode = choosenNode.GetMutatedClone(_context);
+
+			if (choosenNode == _root)
+			{
+				this._root = mutatedNode;
+			}
+			BinaryOperator parent = FindParent(operators, choosenNode) as BinaryOperator;
+			if (parent.A == choosenNode)
+			{
+				parent.A = mutatedNode;
+			}
+			else
+			{
+				parent.B = mutatedNode;
+			}
+		}
+
+
+		private BinaryOperator FindParent(List<IFunctionNode> list, IFunctionNode children)
+		{
+			for (int i = list.Count - 1; i >= 0; i--)
+			{
+				if (list[i] is BinaryOperator bin && (bin.A == children || bin.B == children))
+				{
+					return bin;
+				}
+			}
+
+			return null;
 		}
 	}
 }

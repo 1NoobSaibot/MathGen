@@ -52,5 +52,37 @@ namespace MathGen.Double.Operators
 		{
 			return 1;
 		}
+
+
+		public override IFunctionNode GetMutatedClone(FunctionRandomContext ctx)
+		{
+			switch (ctx.rnd.Next(4))
+			{
+				case 0:
+					return ctx.GetRandomArgument();
+				case 1:
+					return ctx.CreateRandom(this);
+				default:
+					return ChangeValue(ctx.rnd);
+			}
+		}
+
+
+		private IFunctionNode ChangeValue(Random rnd)
+		{
+			double amplitude = 2;
+
+			double divByTen_Times = rnd.Next(15);
+			double divB = 1;
+			for (int i = 0; i < divByTen_Times; i++)
+			{
+				divB *= 10;
+			}
+
+			amplitude /= divB;
+
+			Value += rnd.NextDouble() * amplitude - (amplitude / 2);
+			return this;
+		}
 	}
 }

@@ -1,10 +1,20 @@
-﻿namespace MathGen.Double.Operators
+﻿using System.Collections.Generic;
+
+
+namespace MathGen.Double.Operators
 {
 	public abstract class IFunctionNode
 	{
 		public abstract IFunctionNode Clone();
+		public abstract int GetAmountOfNodes();
 		public abstract double GetValue(double[] functionArgs);
 		public abstract bool IsZero();
+
+
+		public virtual void AddOperatorsToList(List<IFunctionNode> operators)
+		{
+			operators.Add(this);
+		}
 
 
 		public static IFunctionNode operator +(IFunctionNode a, IFunctionNode b)
@@ -37,6 +47,6 @@
 		}
 
 
-		public abstract int GetAmountOfNodes();
+		public abstract IFunctionNode GetMutatedClone(FunctionRandomContext rnd);
 	}
 }

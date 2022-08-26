@@ -1,6 +1,6 @@
 ﻿using MathGen.Double;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using System;
 
 namespace MathGenTest
 {
@@ -11,7 +11,8 @@ namespace MathGenTest
 		public void FunctionWorks()
 		{
 			ArgsDescription args = new ArgsDescription("x");
-			Function f = new Function(args, "x * x + 4");
+			FunctionRandomContext rndCtx = new FunctionRandomContext(args, new Random());
+			Function f = new Function(rndCtx, "x * x + 4");
 
 			Assert.AreEqual(4, f[0]);
 			Assert.AreEqual(8, f[2]);
@@ -24,7 +25,8 @@ namespace MathGenTest
 		{
 			const string originalExpression = "x * x + 4";
 			ArgsDescription args = new ArgsDescription("x");
-			Function f = new Function(args, originalExpression);
+			FunctionRandomContext rndCtx = new FunctionRandomContext(args, new Random());
+			Function f = new Function(rndCtx, originalExpression);
 
 			Assert.AreEqual(originalExpression, f.ToString());
 		}
@@ -35,7 +37,8 @@ namespace MathGenTest
 		{
 			const string originalExpression = "x * x + 4";
 			ArgsDescription args = new ArgsDescription("x");
-			Function f = new Function(args, originalExpression);
+			FunctionRandomContext rndCtx = new FunctionRandomContext(args, new Random());
+			Function f = new Function(rndCtx, originalExpression);
 			Function clone = f.Clone();
 
 			Assert.AreEqual(4, clone[0]);
@@ -49,7 +52,8 @@ namespace MathGenTest
 		{
 			const string originalExpression = "x * x + 4";
 			ArgsDescription args = new ArgsDescription("x");
-			Function f = new Function(args, originalExpression);
+			FunctionRandomContext rndCtx = new FunctionRandomContext(args, new Random());
+			Function f = new Function(rndCtx, originalExpression);
 
 			Assert.AreEqual(5, f.GetAmountOfNodes());
 		}

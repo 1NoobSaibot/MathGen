@@ -1,6 +1,6 @@
 ﻿namespace MathGen.Double.Operators
 {
-	internal class Argument : IFunctionNode
+	public class Argument : IFunctionNode
 	{
 		public int index;
 		public string name;
@@ -50,6 +50,20 @@
 		public override int GetAmountOfNodes()
 		{
 			return 1;
+		}
+
+
+		public override IFunctionNode GetMutatedClone(FunctionRandomContext ctx)
+		{
+			switch (ctx.rnd.Next(3))
+			{
+				case 0:
+					return new Constant(ctx.rnd.NextDouble());
+				case 1:
+					return ctx.CreateRandom(this);
+				default:
+					return ctx.GetRandomArgument();
+			}
 		}
 	}
 }

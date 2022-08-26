@@ -34,6 +34,13 @@ namespace MathGen.Double
 		}
 
 
+		public Argument CreateArgument(Random rnd)
+		{
+			int index = rnd.Next(_names.Length);
+			return new Argument(index, _names[index]);
+		}
+
+
 		internal IFunctionNode CreateArgument(string symbol)
 		{
 			int index = GetIndex(symbol);
