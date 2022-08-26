@@ -65,7 +65,7 @@ namespace MathGen.Genetic
 		{
 			for (int i = 0; i < _candidates.Length; i++)
 			{
-				if (_candidates[i] != null)
+				if (i < AmountOfChoosen && _candidates[i] != null)
 				{
 					continue;
 				}
