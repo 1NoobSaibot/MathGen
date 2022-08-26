@@ -39,6 +39,12 @@
 		}
 
 
+		public override IFunctionNode Clone()
+		{
+			return new Mul(A.Clone(), B.Clone());
+		}
+
+
 		private string AToString()
 		{
 			if (A is IOperator op && op.GetPriority() < GetPriority())

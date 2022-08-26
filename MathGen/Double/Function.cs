@@ -18,6 +18,13 @@ namespace MathGen.Double
 		}
 
 
+		private Function(ArgsDescription args, IFunctionNode root)
+		{
+			_args = args;
+			_root = root;
+		}
+
+
 		public double Calculate(params double[] argValues)
 		{
 			if (_args.Count != argValues.Length)
@@ -32,6 +39,12 @@ namespace MathGen.Double
 		public override string ToString()
 		{
 			return _root.ToString();
+		}
+
+
+		public Function Clone()
+		{
+			return new Function(_args, _root.Clone());
 		}
 
 

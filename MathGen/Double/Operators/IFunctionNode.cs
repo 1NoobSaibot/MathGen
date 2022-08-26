@@ -2,8 +2,10 @@
 {
 	public abstract class IFunctionNode
 	{
+		public abstract IFunctionNode Clone();
 		public abstract double GetValue(double[] functionArgs);
 		public abstract bool IsZero();
+
 
 		public static IFunctionNode operator +(IFunctionNode a, IFunctionNode b)
 		{

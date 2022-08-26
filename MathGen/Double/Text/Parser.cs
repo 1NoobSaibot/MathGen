@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MathGen.Double.Text
 {
-	internal class Parser
+	public class Parser
 	{
 		private ArgsDescription _args;
 		private readonly Stack<MathSymbol> operators = new Stack<MathSymbol>();
@@ -18,7 +18,7 @@ namespace MathGen.Double.Text
 		}
 
 
-		internal static IFunctionNode Parse(ArgsDescription args, string expression)
+		public static IFunctionNode Parse(ArgsDescription args, string expression)
 		{
 			Parser parser = new Parser(args);
 			return parser.Parse(expression);

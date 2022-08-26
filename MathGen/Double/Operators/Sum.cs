@@ -38,5 +38,11 @@
 			string strB = B.ToString();
 			return strA + " + " + strB;
 		}
+
+
+		public override IFunctionNode Clone()
+		{
+			return new Sum(A.Clone(), B.Clone());
+		}
 	}
 }

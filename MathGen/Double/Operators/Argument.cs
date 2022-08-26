@@ -30,6 +30,7 @@
 			return name;
 		}
 
+
 		public override bool Equals(object obj)
 		{
 			if (obj is Argument arg)
@@ -37,6 +38,12 @@
 				return arg.index == index;
 			}
 			return false;
+		}
+
+
+		public override IFunctionNode Clone()
+		{
+			return new Argument(index, name);
 		}
 	}
 }

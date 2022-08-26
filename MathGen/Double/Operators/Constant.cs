@@ -40,5 +40,11 @@ namespace MathGen.Double.Operators
 			}
 			return false;
 		}
+
+
+		public override IFunctionNode Clone()
+		{
+			return new Constant(Value);
+		}
 	}
 }

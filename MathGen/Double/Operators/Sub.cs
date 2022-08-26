@@ -38,6 +38,12 @@
 		}
 
 
+		public override IFunctionNode Clone()
+		{
+			return new Sub(A.Clone(), B.Clone());
+		}
+
+
 		private string BToString()
 		{
 			if (B is IOperator op && op.GetPriority() <= GetPriority())
