@@ -17,5 +17,16 @@ namespace MathGenTest
 			Assert.AreEqual(8, f[2]);
 			Assert.AreEqual(13, f[-3]);
 		}
+
+
+		[TestMethod]
+		public void TestToString()
+		{
+			const string originalExpression = "x * x + 4";
+			ArgsDescription args = new ArgsDescription("x");
+			Function f = new Function(args, originalExpression);
+
+			Assert.AreEqual(originalExpression, f.ToString());
+		}
 	}
 }

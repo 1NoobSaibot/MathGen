@@ -30,5 +30,13 @@
 			}
 			return false;
 		}
+
+
+		public override string ToString()
+		{
+			string strA = A.ToString();
+			string strB = B.ToString();
+			return strA + " + " + strB;
+		}
 	}
 }

@@ -29,5 +29,36 @@
 			}
 			return false;
 		}
+
+
+		public override string ToString()
+		{
+			string strA = AToString();
+			string strB = BToString();
+			return strA + " * " + strB;
+		}
+
+
+		private string AToString()
+		{
+			if (A is IOperator op && op.GetPriority() < GetPriority())
+			{
+				return "( " + A.ToString() + " )";
+			}
+			return A.ToString();
+		}
+
+
+		private string BToString()
+		{
+			if (B is IOperator op)
+			{
+				if ((op.GetPriority() < GetPriority()) || (op.GetPriority() == GetPriority() && !(op is Mul)))
+				{
+					return "( " + B.ToString() + " )";
+				}
+			}
+			return B.ToString();
+		}
 	}
 }

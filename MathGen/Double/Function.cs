@@ -29,6 +29,12 @@ namespace MathGen.Double
 		}
 
 
+		public override string ToString()
+		{
+			return _root.ToString();
+		}
+
+
 		public double this[params double[] args] => Calculate(args);
 	}
 }

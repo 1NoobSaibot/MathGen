@@ -28,5 +28,23 @@
 			}
 			return false;
 		}
+
+
+		public override string ToString()
+		{
+			string strA = A.ToString();
+			string strB = BToString();
+			return strA + " - " + strB;
+		}
+
+
+		private string BToString()
+		{
+			if (B is IOperator op && op.GetPriority() <= GetPriority())
+			{
+				return "( " + B.ToString() + " )";
+			}
+			return B.ToString();
+		}
 	}
 }
