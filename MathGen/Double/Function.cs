@@ -1,4 +1,5 @@
 ﻿using MathGen.Double.Operators;
+using MathGen.Double.Text;
 using System;
 
 

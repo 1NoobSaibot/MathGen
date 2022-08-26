@@ -1,10 +1,9 @@
-﻿using MathGen.Double;
-using MathGen.Double.Operators;
+﻿using MathGen.Double.Operators;
 using System;
 using System.Collections.Generic;
 
 
-namespace MathGen
+namespace MathGen.Double.Text
 {
 	internal class Parser
 	{
@@ -92,7 +91,7 @@ namespace MathGen
 			MathSymbol prevOperator = operators.Pop();
 			IFunctionNode b = operands.Pop();
 			IFunctionNode a = operands.Pop();
-			IOperator res = prevOperator.ToOperator(a, b);
+			IFunctionNode res = prevOperator.ToOperator(a, b);
 			operands.Push(res);
 		}
 
@@ -107,53 +106,6 @@ namespace MathGen
 			{ }
 
 			return _args.CreateArgument(symbol);
-		}
-
-
-		private class MathSymbol
-		{
-			public readonly string OriginalString;
-			public readonly bool IsOperator;
-			public readonly int Priority;
-
-
-			public MathSymbol(string str)
-			{
-				OriginalString = str;
-
-				if (str == ")")
-				{
-					IsOperator = true;
-					Priority = 0;
-				}
-				else if (str == "+" || str == "-")
-				{
-					IsOperator = true;
-					Priority = 1;
-				}
-				else if (str == "*")
-				{
-					IsOperator = true;
-					Priority = 2;
-				}
-				else if (str == "(")
-				{
-					IsOperator = true;
-					Priority = 0;
-				}
-			}
-
-
-			internal IOperator ToOperator(IFunctionNode a, IFunctionNode b)
-			{
-				switch (OriginalString[0])
-				{
-					case '+': return new Sum(a, b);
-					case '-': return new Sub(a, b);
-					case '*': return new Mul(a, b);
-				}
-				throw new Exception("Invalid type of Operator: Original string = " + OriginalString);
-			}
 		}
 	}
 }
