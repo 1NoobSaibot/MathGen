@@ -14,7 +14,7 @@ namespace MathGen.Genetic
 		private Model[] _candidates;
 
 
-		private GeneticAlgorithm(int generationLength, int amountOfChoosen)
+		public GeneticAlgorithm(int generationLength, int amountOfChoosen)
 		{
 			if (amountOfChoosen >= GenerationLength)
 			{
