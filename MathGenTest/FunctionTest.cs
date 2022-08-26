@@ -42,5 +42,16 @@ namespace MathGenTest
 			Assert.AreEqual(8, clone[2]);
 			Assert.AreEqual(13, clone[-3]);
 		}
+
+
+		[TestMethod]
+		public void AmountOfNode()
+		{
+			const string originalExpression = "x * x + 4";
+			ArgsDescription args = new ArgsDescription("x");
+			Function f = new Function(args, originalExpression);
+
+			Assert.AreEqual(5, f.GetAmountOfNodes());
+		}
 	}
 }

@@ -46,5 +46,11 @@ namespace MathGen.Double.Operators
 		{
 			return new Constant(Value);
 		}
+
+
+		public override int GetAmountOfNodes()
+		{
+			return 1;
+		}
 	}
 }

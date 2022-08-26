@@ -45,5 +45,11 @@
 		{
 			return new Argument(index, name);
 		}
+
+
+		public override int GetAmountOfNodes()
+		{
+			return 1;
+		}
 	}
 }

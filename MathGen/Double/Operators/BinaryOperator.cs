@@ -11,5 +11,11 @@
 			A = a;
 			B = b;
 		}
+
+
+		public override int GetAmountOfNodes()
+		{
+			return 1 + A.GetAmountOfNodes() + B.GetAmountOfNodes();
+		}
 	}
 }

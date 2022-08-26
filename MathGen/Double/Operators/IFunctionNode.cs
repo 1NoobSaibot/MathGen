@@ -35,5 +35,8 @@
 			}
 			return new Mul(a, b);
 		}
+
+
+		public abstract int GetAmountOfNodes();
 	}
 }

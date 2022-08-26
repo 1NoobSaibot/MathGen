@@ -49,5 +49,11 @@ namespace MathGen.Double
 
 
 		public double this[params double[] args] => Calculate(args);
+
+
+		public int GetAmountOfNodes()
+		{
+			return _root.GetAmountOfNodes();
+		}
 	}
 }
