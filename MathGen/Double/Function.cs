@@ -80,7 +80,9 @@ namespace MathGen.Double
 			if (choosenNode == _root)
 			{
 				this._root = mutatedNode;
+				return;
 			}
+
 			BinaryOperator parent = FindParent(operators, choosenNode) as BinaryOperator;
 			if (parent.A == choosenNode)
 			{
@@ -95,7 +97,7 @@ namespace MathGen.Double
 
 		private BinaryOperator FindParent(List<IFunctionNode> list, IFunctionNode children)
 		{
-			for (int i = list.Count - 1; i >= 0; i--)
+			for (int i = 0; i < list.Count; i++)
 			{
 				if (list[i] is BinaryOperator bin && (bin.A == children || bin.B == children))
 				{
