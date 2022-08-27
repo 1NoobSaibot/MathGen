@@ -60,20 +60,20 @@ namespace MathGen.Double
 		}
 
 
-		public Function GetMutatedClone(Random rnd)
+		public Function GetMutatedClone()
 		{
 			Function clone = Clone();
-			clone.Mutate(rnd);
+			clone.Mutate();
 			return clone;
 		}
 
 
-		private void Mutate(Random rnd)
+		private void Mutate()
 		{
 			List<IFunctionNode> operators = new List<IFunctionNode>();
 			_root.AddOperatorsToList(operators);
 
-			int randomOpIndex = rnd.Next(operators.Count);
+			int randomOpIndex = _context.rnd.Next(operators.Count);
 			IFunctionNode choosenNode = operators[randomOpIndex];
 			IFunctionNode mutatedNode = choosenNode.GetMutatedClone(_context);
 
