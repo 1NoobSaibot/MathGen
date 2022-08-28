@@ -80,8 +80,14 @@ namespace MathGen.Double.Operators
 			}
 
 			amplitude /= divB;
+			double difference = rnd.NextDouble() * amplitude - (amplitude * 0.5);
 
-			Value += rnd.NextDouble() * amplitude - (amplitude / 2);
+			if (rnd.Next() % 2 == 0) {
+				Value += difference;
+			} else {
+				Value *= (1 + difference);
+			}
+
 			return this;
 		}
 	}
