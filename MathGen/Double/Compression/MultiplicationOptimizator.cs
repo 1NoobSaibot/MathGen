@@ -253,6 +253,9 @@ namespace MathGen.Double.Compression
           res = new Mul(res, arguments[i].ToFunctionNode());
 				}
 
+        if (Math.Abs(Scalar - 1) < 1.0E-10) {
+          return res;
+        }
         return new Mul(new Constant(Scalar), res);
 			}
 
