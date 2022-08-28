@@ -1193,12 +1193,18 @@ namespace MathGen.Double.Compression
 		};
 
 
-		public static IFunctionNode Optimize(IFunctionNode root)
+		public static Function Optimize(Function f)
 		{
+			IFunctionNode newRoot = _OptimizeTree(f.Root);
+			return new Function(f.RndContext, newRoot);
+		}
+
+
+		private static IFunctionNode _OptimizeTree(IFunctionNode root) {
 			if (root is BinaryOperator b)
 			{
-				b.A = Optimize(b.A);
-				b.B = Optimize(b.B);
+				b.A = _OptimizeTree(b.A);
+				b.B = _OptimizeTree(b.B);
 			}
 
 			for (int i = 0; i < _rules.Length; i++)
