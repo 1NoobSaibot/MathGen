@@ -25,6 +25,7 @@ namespace MathGen.Double.Compression
     private IFunctionNode Compress(IFunctionNode origin)
 		{
       List<Multiplication> allMultiplications = Decompress(origin);
+      RemoveZeros(allMultiplications);
 
       IFunctionNode res = allMultiplications[0].ToFunctionNode();
       for (int i = 1; i < allMultiplications.Count; i++)
@@ -45,7 +46,20 @@ namespace MathGen.Double.Compression
 		}
 
 
-    private List<Multiplication> Decompress(IFunctionNode root)
+		private void RemoveZeros(List<Multiplication> allMultiplications)
+		{
+			for (int i = 0; i < allMultiplications.Count; i++)
+			{
+        if (Math.Abs(allMultiplications[i].Scalar) < 1.0E-10)
+				{
+          allMultiplications.RemoveAt(i);
+          i--;
+				}
+			}
+		}
+
+
+		private List<Multiplication> Decompress(IFunctionNode root)
 		{
       List<Multiplication> multiplications = new List<Multiplication>();
 
