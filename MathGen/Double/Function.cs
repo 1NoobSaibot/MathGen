@@ -7,47 +7,47 @@ namespace MathGen.Double
 {
 	public class Function
 	{
-		private IFunctionNode _root;
-		private FunctionRandomContext _context;
+		internal IFunctionNode Root { get; private set; }
+		internal readonly FunctionRandomContext RndContext;
 		public readonly int AmountOfNodes;
 
 
 		public Function(FunctionRandomContext context, string expression)
 		{
-			_context = context;
-			_root = Parser.Parse(context.Args, expression);
-			AmountOfNodes = _root.GetAmountOfNodes();
+			RndContext = context;
+			Root = Parser.Parse(context.Args, expression);
+			AmountOfNodes = Root.GetAmountOfNodes();
 		}
 
 
-		private Function(FunctionRandomContext context, IFunctionNode root)
+		internal Function(FunctionRandomContext context, IFunctionNode root)
 		{
-			_context = context;
-			_root = root;
-			AmountOfNodes = _root.GetAmountOfNodes();
+			RndContext = context;
+			Root = root;
+			AmountOfNodes = Root.GetAmountOfNodes();
 		}
 
 
 		public double Calculate(params double[] argValues)
 		{
-			if (_context.Args.Count != argValues.Length)
+			if (RndContext.Args.Count != argValues.Length)
 			{
 				throw new Exception("Amount of arguments doesn't equal to count of its names");
 			}
 
-			return _root.GetValue(argValues);
+			return Root.GetValue(argValues);
 		}
 
 
 		public override string ToString()
 		{
-			return _root.ToString();
+			return Root.ToString();
 		}
 
 
 		public Function Clone()
 		{
-			return new Function(_context, _root.Clone());
+			return new Function(RndContext, Root.Clone());
 		}
 
 
@@ -71,15 +71,15 @@ namespace MathGen.Double
 		private void Mutate()
 		{
 			List<IFunctionNode> operators = new List<IFunctionNode>();
-			_root.AddOperatorsToList(operators);
+			Root.AddOperatorsToList(operators);
 
-			int randomOpIndex = _context.rnd.Next(operators.Count);
+			int randomOpIndex = RndContext.rnd.Next(operators.Count);
 			IFunctionNode choosenNode = operators[randomOpIndex];
-			IFunctionNode mutatedNode = choosenNode.GetMutatedClone(_context);
+			IFunctionNode mutatedNode = choosenNode.GetMutatedClone(RndContext);
 
-			if (choosenNode == _root)
+			if (choosenNode == Root)
 			{
-				this._root = mutatedNode;
+				this.Root = mutatedNode;
 				return;
 			}
 

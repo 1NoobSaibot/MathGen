@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Double\ArgsDescription.cs" />
+    <Compile Include="Double\Compression\MultiplicationOptimizator.cs" />
     <Compile Include="Double\FunctionRandomContext.cs" />
     <Compile Include="Double\Operators\Argument.cs" />
     <Compile Include="Double\Operators\BinaryOperator.cs" />
