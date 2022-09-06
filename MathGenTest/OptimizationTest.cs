@@ -116,7 +116,7 @@ namespace MathGenTest
 			FunctionRandomContext rndCtx = new FunctionRandomContext(args, new Random());
 			Function fOriginal = new Function(rndCtx, originalExpression);
 
-			HardOptimizer optimizer = new HardOptimizer();
+			HardOptimizer optimizer = new HardOptimizer(new TimeSpan(0, 1, 0));
 			Function fOptimized = optimizer.Optimize(fOriginal.Clone());
 
 			for (int alpha = -90; alpha <= 180; alpha += 90)

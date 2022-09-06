@@ -5,7 +5,7 @@ namespace MathGen.Double.Compression
 {
 	public class Optimizer
 	{
-		private Rule[] _rules;
+		protected Rule[] _rules { get; private set; }
 
 
 		public Optimizer(Rule[] rules)
@@ -14,7 +14,7 @@ namespace MathGen.Double.Compression
 		}
 
 
-		public Function Optimize(Function f)
+		public virtual Function Optimize(Function f)
 		{
 			IFunctionNode newRoot = _OptimizeTree(f.Root);
 			return new Function(f.RndContext, newRoot);
