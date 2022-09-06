@@ -24,28 +24,27 @@ namespace MathGen.Double.Compression
 
     private IFunctionNode Compress(IFunctionNode origin)
 		{
-      List<Multiplication> allMultiplications = Decompress(origin);
-
-      IFunctionNode res = allMultiplications[0].ToFunctionNode();
-      for (int i = 1; i < allMultiplications.Count; i++)
-			{
-        Multiplication multiplication = allMultiplications[i];
-        if (multiplication.Scalar < 0)
-				{
-          multiplication.Scalar *= -1;
-          res = new Sub(res, multiplication.ToFunctionNode());
-				}
-        else
-				{
-          res = new Sum(res, multiplication.ToFunctionNode());
-				}
-			}
-
-      return res;
+			List<Multiplication> allMultiplications = Decompress(origin);
+      ClearZeros(allMultiplications);
+			ReducedNode reduced = new ReducedNode(allMultiplications);
+      return reduced.ToFunctionNode();
 		}
 
 
-    private List<Multiplication> Decompress(IFunctionNode root)
+		private void ClearZeros(List<Multiplication> muls)
+		{
+			for (int i = 0; i < muls.Count; i++)
+			{
+        if (Math.Abs(muls[i].Scalar) < 1E-14)
+				{
+          muls.RemoveAt(i);
+          i--;
+				}
+			}
+		}
+
+
+		private List<Multiplication> Decompress(IFunctionNode root)
 		{
       List<Multiplication> multiplications = new List<Multiplication>();
 
@@ -138,168 +137,5 @@ namespace MathGen.Double.Compression
 
       return result;
     }
-
-
-    private class Multiplication
-		{
-      public double Scalar = 1;
-      private List<ArgumentPower> arguments = new List<ArgumentPower>();
-
-
-      public Multiplication(double scalar)
-			{
-        Scalar = scalar;
-			}
-
-			public Multiplication(Argument argument)
-			{
-        arguments.Add(new ArgumentPower(argument));
-			}
-
-
-			internal bool HasTheSameArgumentPowers(Multiplication anotherMul)
-			{
-				if (arguments.Count != anotherMul.arguments.Count)
-				{
-          return false;
-				}
-
-        for (int i = 0; i < arguments.Count; i++)
-				{
-          if (anotherMul.HasTheSamePowerOfArgument(arguments[i]) == false)
-					{
-            return false;
-					}
-				}
-
-        return true;
-			}
-
-
-			private bool HasTheSamePowerOfArgument(ArgumentPower argumentPower)
-			{
-        for (int i = 0; i < arguments.Count; i++)
-				{
-          if (argumentPower.Arg.Equals(arguments[i].Arg) && argumentPower.Power == arguments[i].Power)
-					{
-            return true;
-					}
-				}
-
-        return false;
-			}
-
-
-      public static Multiplication operator *(Multiplication a, Multiplication b)
-			{
-        Multiplication res = new Multiplication(a.Scalar * b.Scalar);
-
-        for (int i = 0; i < a.arguments.Count; i++)
-				{
-          ArgumentPower argPow = a.arguments[i];
-          res.Mul(argPow);
-				}
-        for (int i = 0; i < b.arguments.Count; i++)
-        {
-          ArgumentPower argPow = b.arguments[i];
-          res.Mul(argPow);
-        }
-
-        return res;
-      }
-
-
-			private void Mul(ArgumentPower argPow)
-			{
-				for (int i = 0; i < arguments.Count; i++)
-				{
-          if (arguments[i].Arg.Equals(argPow.Arg))
-					{
-            arguments[i].IncPower(argPow.Power);
-            return;
-					}
-				}
-
-        // It's really matter to clone object here, because you can break calculations for yourself and feel headache
-        ArgumentPower copy = new ArgumentPower(argPow.Arg, argPow.Power);
-        arguments.Add(copy);
-			}
-
-
-			internal IFunctionNode ToFunctionNode()
-			{
-        if (arguments.Count == 0)
-				{
-          return new Constant(Scalar);
-				}
-
-        IFunctionNode res = arguments[0].ToFunctionNode();
-        for (int i = 1; i < arguments.Count; i++)
-				{
-          res = new Mul(res, arguments[i].ToFunctionNode());
-				}
-
-        return new Mul(new Constant(Scalar), res);
-			}
-
-
-			public override string ToString()
-			{
-        string str = Scalar + " ";
-
-        for (int i = 0; i < arguments.Count; i++)
-				{
-          str += arguments[i].ToString() + " ";
-				}
-
-				return str;
-			}
-
-
-			private class ArgumentPower
-			{
-        public readonly Argument Arg;
-        public int Power;
-
-        public ArgumentPower(Argument arg)
-				{
-          Arg = arg;
-          Power = 1;
-				}
-
-
-        public ArgumentPower(Argument arg, int power)
-        {
-          Arg = arg;
-          Power = power;
-        }
-
-				internal void IncPower(int power)
-				{
-          Power += power;
-				}
-
-				internal IFunctionNode ToFunctionNode()
-				{
-					/*if (Power == 1)
-					{
-            return Arg;
-					}*/
-
-          IFunctionNode res = Arg;
-          for (int i = 1; i < Power; i++)
-					{
-            res = new Mul(res, Arg);
-					}
-          return res;
-				}
-
-
-				public override string ToString()
-				{
-					return Arg.ToString() + "^" + Power;
-				}
-			}
-		}
   }
 }

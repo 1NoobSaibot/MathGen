@@ -49,8 +49,8 @@ namespace MathGenTest
 			Assert.AreEqual(4, f[4, 4]);
 			Assert.AreEqual(4, f[0, 4]);
 
-			// It is 9, because as result I expect "0*x*x + 1*y"
-			Assert.AreEqual(9, f.AmountOfNodes);
+			// It is 1, because as result I expect "y"
+			Assert.AreEqual(1, f.AmountOfNodes);
 		}
 
 
@@ -67,8 +67,8 @@ namespace MathGenTest
 			Assert.AreEqual(4, f[4, 0]);
 			Assert.AreEqual(4, f[0, 4]);
 
-			// It is 7, because as result I expect "1*x + 1*y"
-			Assert.AreEqual(7, f.AmountOfNodes);
+			// It is 3, because as result I expect "x + y"
+			Assert.AreEqual(3, f.AmountOfNodes);
 		}
 
 
@@ -85,8 +85,8 @@ namespace MathGenTest
 			Assert.AreEqual(4, f[4, 0]);
 			Assert.AreEqual(12, f[0, 4]);
 
-			// It is 7, because as result I expect "1*x + 3*y"
-			Assert.AreEqual(7, f.AmountOfNodes);
+			// It is 5, because as result I expect "x + 3*y"
+			Assert.AreEqual(5, f.AmountOfNodes);
 		}
 
 
@@ -148,7 +148,7 @@ namespace MathGenTest
 				}
 
 				Assert.AreEqual(457, fOriginal.AmountOfNodes);
-				Assert.AreEqual(7467, fOptimized.AmountOfNodes);
+				Assert.AreEqual(2065, fOptimized.AmountOfNodes);
 			}
 		}
 
