@@ -6,19 +6,23 @@ namespace MathGen.Double.Compression
 {
   public class MultiplicationOptimizator
   {
-    private readonly Function function;
-    private MultiplicationOptimizator(Function f)
+    private readonly IFunctionNode Result;
+    private MultiplicationOptimizator(IFunctionNode f)
 		{
-      IFunctionNode newRoot = Compress(f.Root);
-      function = new Function(f.RndContext, newRoot);
+      Result = Compress(f);
 		}
 
 
     public static Function Optimize(Function f)
 		{
-      MultiplicationOptimizator optimizator = new MultiplicationOptimizator(f);
-      return optimizator.function;
-      // return f.Clone();
+      MultiplicationOptimizator optimizator = new MultiplicationOptimizator(f.Root);
+      return new Function(f.RndContext, optimizator.Result);
+		}
+
+
+    public static IFunctionNode OptimizeTree(IFunctionNode root)
+		{
+      return new MultiplicationOptimizator(root).Result;
 		}
 
 

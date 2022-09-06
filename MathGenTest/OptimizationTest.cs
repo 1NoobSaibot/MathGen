@@ -116,7 +116,8 @@ namespace MathGenTest
 			FunctionRandomContext rndCtx = new FunctionRandomContext(args, new Random());
 			Function fOriginal = new Function(rndCtx, originalExpression);
 
-			Function fOptimized = MultiplicationOptimizator.Optimize(fOriginal.Clone());
+			HardOptimizer optimizer = new HardOptimizer();
+			Function fOptimized = optimizer.Optimize(fOriginal.Clone());
 
 			for (int alpha = -90; alpha <= 180; alpha += 90)
 			{
@@ -148,7 +149,7 @@ namespace MathGenTest
 				}
 
 				Assert.AreEqual(457, fOriginal.AmountOfNodes);
-				Assert.AreEqual(2065, fOptimized.AmountOfNodes);
+				Assert.AreEqual(443, fOptimized.AmountOfNodes);
 			}
 		}
 
