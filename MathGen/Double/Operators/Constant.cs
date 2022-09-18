@@ -22,7 +22,7 @@ namespace MathGen.Double.Operators
 
 		public override bool IsZero()
 		{
-			return Math.Abs(Value) <= 1E-15;
+			return Math.Abs(Value) == 0.0;
 		}
 
 
@@ -70,23 +70,14 @@ namespace MathGen.Double.Operators
 
 		private IFunctionNode ChangeValue(Random rnd)
 		{
-			double amplitude = 2;
+			double precision = rnd.Next(16);
+			int order = Value == 0.0
+				? 0
+				: (int)Math.Log10(Math.Abs(Value));
 
-			double divByTen_Times = rnd.Next(15);
-			double divB = 1;
-			for (int i = 0; i < divByTen_Times; i++)
-			{
-				divB *= 10;
-			}
-
-			amplitude /= divB;
-			double difference = rnd.NextDouble() * amplitude - (amplitude * 0.5);
-
-			if (rnd.Next() % 2 == 0) {
-				Value += difference;
-			} else {
-				Value *= (1 + difference);
-			}
+			double scale = Math.Pow(10, order - precision);
+			double difference = rnd.NextDouble() * 2 - 1;
+			Value += scale * difference;
 
 			return this;
 		}
