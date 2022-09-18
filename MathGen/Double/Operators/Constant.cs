@@ -70,7 +70,7 @@ namespace MathGen.Double.Operators
 
 		private IFunctionNode ChangeValue(Random rnd)
 		{
-			double precision = rnd.Next(16);
+			double precision = rnd.Next(18);
 			int order = Value == 0.0
 				? 0
 				: (int)Math.Log10(Math.Abs(Value));
