@@ -15,7 +15,7 @@ namespace MathGen.Double.Compression
 				.Replace(op =>
 				{
 					IFunctionNode newRoot = MultiplicationOptimizator.OptimizeTree(op);
-					if (op.GetAmountOfNodes() < newRoot.GetAmountOfNodes())
+					if (op.GetAmountOfNodes() <= newRoot.GetAmountOfNodes())
 					{
 						return op;
 					}
