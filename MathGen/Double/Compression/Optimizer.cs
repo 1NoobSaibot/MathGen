@@ -28,12 +28,24 @@ namespace MathGen.Double.Compression
 				b.B = _OptimizeTree(b.B);
 			}
 
-			for (int i = 0; i < _rules.Length; i++)
-			{
-				root = _rules[i].Optimize(root);
-			}
 
-			return root;
+			int oldAmountOfNodes = root.GetAmountOfNodes();
+			do
+			{
+				for (int i = 0; i < _rules.Length; i++)
+				{
+					root = _rules[i].Optimize(root);
+				}
+
+				int newAmountOfNodes = root.GetAmountOfNodes();
+
+				if (oldAmountOfNodes == newAmountOfNodes)
+				{
+					return root;
+				}
+
+				oldAmountOfNodes = newAmountOfNodes;
+			} while (true);
 		}
 	}
 }

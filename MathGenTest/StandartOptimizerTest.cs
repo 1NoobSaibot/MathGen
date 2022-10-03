@@ -7,18 +7,16 @@ using System;
 namespace MathGenTest
 {
 	[TestClass]
-	public class SimilarReductionTest
+	public class StandartOptimizerTest
 	{
-		Optimizer optimizer = new Optimizer(new Rule[1]
-		{
-			new SimilarReductionRule()
-		});
+		Optimizer optimizer = new StandartOptimizer();
 
 
 		[TestMethod]
 		public void Level_Infinity()
 		{
 			Function fOriginal = HardFunctionExamples.GetFunction();
+
 			Function fOptimized = optimizer.Optimize(fOriginal.Clone());
 
 			double maxError = 0;
@@ -49,7 +47,7 @@ namespace MathGenTest
 				}
 
 				Assert.AreEqual(457, fOriginal.AmountOfNodes);
-				Assert.AreEqual(439, fOptimized.AmountOfNodes);
+				Assert.AreEqual(437, fOptimized.AmountOfNodes);
 				AssertAreLessThan(maxError, 1.0E-13);
 			}
 		}

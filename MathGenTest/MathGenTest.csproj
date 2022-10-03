@@ -49,6 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HardFunctionExamples.cs" />
+    <Compile Include="StandartOptimizerTest.cs" />
     <Compile Include="SimilarReductionTest.cs" />
     <Compile Include="HardOptimizationTest.cs" />
     <Compile Include="FunctionTest.cs" />

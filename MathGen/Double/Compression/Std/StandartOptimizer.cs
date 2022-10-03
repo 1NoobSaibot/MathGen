@@ -1,12 +1,14 @@
 ﻿using MathGen.Double.Operators;
 
 
-namespace MathGen.Double.Compression
+namespace MathGen.Double.Compression.Std
 {
 	public class StandartOptimizer : Optimizer
 	{
 		private readonly static Rule[] StandartRules = new Rule[]
 		{
+			new SimilarReductionRule(),
+
 			#region Пусті операції
 			// 0 * Any => 0
 			new Rule()
@@ -37,16 +39,6 @@ namespace MathGen.Double.Compression
 			,
 
 
-			// A - A => 0
-			new Rule()
-				.Where(op =>
-				{
-					return op is Sub sub && sub.A.Equals(sub.B);
-				})
-				.Replace(_ => new Constant(0))
-			,
-
-
 			// A - 0 => A
 			new Rule()
 				.Where(op =>
@@ -54,30 +46,6 @@ namespace MathGen.Double.Compression
 					return op is Sub sub && sub.B.IsZero();
 				})
 				.Replace(op => (op as Sub).A)
-			,
-
-
-			// 1 * B => B
-			new Rule()
-				.Where(op =>
-				{
-					return op is Mul mul
-						&& mul.A is Constant ca
-						&& ca.Value == 1;
-				})
-				.Replace(op => (op as Mul).B)
-			,
-
-
-			// A * 1 => A
-			new Rule()
-				.Where(op =>
-				{
-					return op is Mul mul
-						&& mul.B is Constant cb
-						&& cb.Value == 1;
-				})
-				.Replace(op => (op as Mul).A)
 			,
 			#endregion
 
@@ -944,6 +912,7 @@ namespace MathGen.Double.Compression
 			#endregion
 
 			#region Скорочення подібних
+
 			// A + A => 2 * A
 			new Rule()
 				.Where(op =>
@@ -952,85 +921,6 @@ namespace MathGen.Double.Compression
 				})
 				.Replace(op => new Mul(new Constant(2), (op as Sum).A))
 			,
-
-			#region Positives and Negatives
-			// A + (Any - A) => Any
-			new Rule()
-				.Where(op =>
-				{
-					return op is Sum sum
-						&& sum.B is Sub subB
-						&& subB.B.Equals(sum.A);
-				})
-				.Replace(op =>
-				{
-					Sum sum = op as Sum;
-					Sub subB = sum.B as Sub;
-					return subB.A;
-				})
-			,
-
-
-			// (Any - B) + B => Any
-			new Rule()
-				.Where(op =>
-				{
-					return op is Sum sum
-						&& sum.A is Sub subA
-						&& subA.B.Equals(sum.B);
-				})
-				.Replace(op =>
-				{
-					Sum sum = op as Sum;
-					Sub subA = sum.A as Sub;
-					return subA.A;
-				})
-			,
-
-
-			// A - (Any + A) => Any
-			// A - (A + Any) => Any
-			new Rule()
-				.Where(op =>
-				{
-					return op is Sub sub
-						&& sub.B is Sum sum
-						&& (sub.A.Equals(sum.A) || sub.A.Equals(sum.B));
-				})
-				.Replace(op =>
-				{
-					Sub sub = op as Sub;
-					Sum sum = sub.B as Sum;
-					if (sub.A.Equals(sum.A))
-					{
-						return sum.B;
-					}
-					return sum.A;
-				})
-			,
-
-
-			// (Any + A) - A => Any
-			// (A + Any) - A => Any
-			new Rule()
-				.Where(op =>
-				{
-					return op is Sub sub
-						&& sub.A is Sum sum
-						&& (sub.B.Equals(sum.A) || sub.B.Equals(sum.B));
-				})
-				.Replace(op =>
-				{
-					Sub sub = op as Sub;
-					Sum sum = sub.A as Sum;
-					if (sub.B.Equals(sum.A))
-					{
-						return sum.B;
-					}
-					return sum.A;
-				})
-			,
-			#endregion
 
 			#region (A * B) + (A * C) = A * (B + C)
 			// (A * B) + (A * C) => A * (B + C)
