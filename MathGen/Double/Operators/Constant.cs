@@ -70,6 +70,12 @@ namespace MathGen.Double.Operators
 
 		private IFunctionNode ChangeValue(Random rnd)
 		{
+			if (rnd.Next() > 0.5)
+			{
+				Value = Math.Round(Value);
+				return this;
+			}
+
 			double precision = rnd.Next(18);
 			int order = Value == 0.0
 				? 0
