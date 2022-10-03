@@ -108,6 +108,20 @@ namespace MathGenTest
 		}
 
 
+		/*[TestMethod]
+		public void CanExtractComplexCommonPart()
+		{
+			string originalExpression = "a * x + a * y + a * z + b * x + b * y + b * z + c * x + c * y + c * z";
+			ArgsDescription args = new ArgsDescription("a", "b", "c", "x", "y", "z");
+			FunctionRandomContext rndCtx = new FunctionRandomContext(args, new Random());
+			Function fOriginal = new Function(rndCtx, originalExpression);
+
+			HardOptimizer optimizer = new HardOptimizer(new TimeSpan(0, 1, 0));
+			Function fOptimized = optimizer.Optimize(fOriginal);
+			Assert.AreEqual(11, fOptimized.AmountOfNodes);
+		}*/
+
+
 		[TestMethod]
 		public void Level_Infinity()
 		{

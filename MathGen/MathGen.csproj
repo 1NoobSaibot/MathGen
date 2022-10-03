@@ -45,7 +45,8 @@
     <Compile Include="Double\Compression\Multiplication.cs" />
     <Compile Include="Double\Compression\MultiplicationOptimizator.cs" />
     <Compile Include="Double\Compression\HardOptimizer.cs" />
-    <Compile Include="Double\Compression\StandartOptimizer.cs" />
+    <Compile Include="Double\Compression\Std\SimilarReductionRule.cs" />
+    <Compile Include="Double\Compression\Std\StandartOptimizer.cs" />
     <Compile Include="Double\Compression\ReducedNode.cs" />
     <Compile Include="Double\FunctionRandomContext.cs" />
     <Compile Include="Double\Operators\Argument.cs" />
