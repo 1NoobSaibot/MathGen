@@ -70,7 +70,7 @@ namespace MathGen.Double.Operators
 
 		private IFunctionNode ChangeValue(Random rnd)
 		{
-			if (rnd.Next() > 0.5)
+			if (rnd.NextDouble() > 0.5)
 			{
 				Value = Math.Round(Value);
 				return this;
