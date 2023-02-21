@@ -87,5 +87,11 @@ namespace MathGen.Double.Operators
 
 			return this;
 		}
+
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
 	}
 }

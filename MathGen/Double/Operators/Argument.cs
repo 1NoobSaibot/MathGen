@@ -65,5 +65,11 @@
 					return ctx.GetRandomArgument();
 			}
 		}
+
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
 	}
 }

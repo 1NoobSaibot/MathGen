@@ -242,6 +242,22 @@ namespace MathGen.Double.Compression.Std
 				}
 				return new Element(a.Scalar - b.Scalar, a.Node);
 			}
+
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Element element) {
+					return this == element;
+				}
+
+				return false;
+			}
+
+
+			public override int GetHashCode()
+			{
+				throw new NotImplementedException();
+			}
 		}
 	}
 }

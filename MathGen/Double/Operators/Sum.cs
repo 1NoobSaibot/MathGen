@@ -44,5 +44,11 @@
 		{
 			return new Sum(A.Clone(), B.Clone());
 		}
+
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
 	}
 }

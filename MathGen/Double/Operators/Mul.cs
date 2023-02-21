@@ -66,5 +66,11 @@
 			}
 			return B.ToString();
 		}
+
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
 	}
 }
